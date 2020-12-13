@@ -1,0 +1,20 @@
+body {background-color: #fafcff;}
+
+.chart {margin-left: 60px; width: 600px !important; border-radius: 25px;}
+
+.arrow-left {
+    height: 25px;
+    width: 30px;
+    margin-left: 50px !important;
+}
+
+.arrow-left1 {
+    margin-left: 80px !important;
+}
+
+.button-profile {
+    background-color: #eee;
+    border-radius: 10px;
+    padding: 10px 7px 10px 7px;
+    width: 300px !important;
+}

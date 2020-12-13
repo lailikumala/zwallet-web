@@ -1,0 +1,12 @@
+
+.form-input-pin{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+}
+
+.input-line{
+    position: absolute;
+    bottom: 10px;
+}

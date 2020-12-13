@@ -1,0 +1,11 @@
+
+
+.description {
+    line-height: 10px;
+}
+
+.content {
+    height: 550px !important;
+}
+
+.addPhone {border: none; border-radius: 5px; width: 240px; height: 40px; background: #6379f4;}
