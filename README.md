@@ -33,16 +33,40 @@
  ### Profile Information
  <img src="https://user-images.githubusercontent.com/66887616/102000396-d10fc080-3c9b-11eb-8561-1bfd44e5d6c0.png" width="550">
  
+ ## How to install and Run application 
 
-## How to run the application
-   To run this application you must download and install the server first
+### Download project and install dependencies
 
- ### Download & install project client
+```
+~$ git clone https://github.com/lailikumala92/zwallet-web.git
+yarn
+```
+
+### Run Application
+   <ul>
+    <li>Make Sure you had clone this repo</li>
+    <li>Open terminal in this project and run</li>
+   </ul>
+   
  ```
- ~$ git clone https://github.com/lailikumala92/zwallet-web.git
- yarn
- ```
+yarn start
+
+```
+
+ ## You can use API Zwallet or from local server
  ### API Zwallet
+ 
   https://db-zwallet.herokuapp.com/
+  
+ ### If use local server you must download this repo and install dependencies
+ 
+ ```
+~$ git clone https://github.com/lailikumala92/db-zwallet.git
+npm install
+```
+
+## Link Publish App
+https://app-zwallet-web.web.app/login
+ 
 
 
