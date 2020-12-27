@@ -16,22 +16,22 @@
 ## in-app features
   
  ### Login
- <img src="https://user-images.githubusercontent.com/66887616/102000392-cf45fd00-3c9b-11eb-83c5-2927db59b2c0.png" width="550">
+ <img src="https://user-images.githubusercontent.com/66887616/102000392-cf45fd00-3c9b-11eb-83c5-2927db59b2c0.png" width="650">
   
  ### Forgot Password
- <img src="https://user-images.githubusercontent.com/66887616/102000397-d1a85700-3c9b-11eb-8749-db253efecf6a.png" width="550">
+ <img src="https://user-images.githubusercontent.com/66887616/102000397-d1a85700-3c9b-11eb-8749-db253efecf6a.png" width="650">
   
  ### Search Transfer
- <img src="https://user-images.githubusercontent.com/66887616/102000398-d240ed80-3c9b-11eb-8b41-1e622419d282.png" width="550">
+ <img src="https://user-images.githubusercontent.com/66887616/102000398-d240ed80-3c9b-11eb-8b41-1e622419d282.png" width="650">
  
  ### Top Up
- <img src="https://user-images.githubusercontent.com/66887616/102000399-d2d98400-3c9b-11eb-9f39-22dca0c1d8aa.png" width="550">
+ <img src="https://user-images.githubusercontent.com/66887616/102000399-d2d98400-3c9b-11eb-9f39-22dca0c1d8aa.png" width="650">
  
  ### Profile
- <img src="https://user-images.githubusercontent.com/66887616/102000395-d0772a00-3c9b-11eb-8261-ab0e297cbc18.png" width="550">
+ <img src="https://user-images.githubusercontent.com/66887616/102000395-d0772a00-3c9b-11eb-8261-ab0e297cbc18.png" width="650">
  
  ### Profile Information
- <img src="https://user-images.githubusercontent.com/66887616/102000396-d10fc080-3c9b-11eb-8561-1bfd44e5d6c0.png" width="550">
+ <img src="https://user-images.githubusercontent.com/66887616/102000396-d10fc080-3c9b-11eb-8561-1bfd44e5d6c0.png" width="650">
  
  ## How to install and Run application 
 
