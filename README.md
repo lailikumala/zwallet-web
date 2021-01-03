@@ -37,7 +37,7 @@
  <img src="https://user-images.githubusercontent.com/66887616/103489375-fdb18680-4dc8-11eb-8327-e64e563d7507.png" width="650">
  
   ### Transfer Status
- <img src="https://user-images.githubusercontent.com/66887616/103489375-fdb18680-4dc8-11eb-8327-e64e563d7507.png" width="650">
+ <img src="https://user-images.githubusercontent.com/66887616/103489385-04d89480-4dc9-11eb-8d32-edea8c77920a.png" width="650">
  
  ### Top Up
  <img src="https://user-images.githubusercontent.com/66887616/103489383-043ffe00-4dc9-11eb-851b-e633ed3b281e.png" width="650">
