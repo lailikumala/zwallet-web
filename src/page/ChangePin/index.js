@@ -58,7 +58,7 @@ const Content = (props) => {
               
             <div className="d-flex flex-column">
               <div className="d-flex justify-content-center" style={{marginTop: '100px', marginBottom: '90px'}}>
-              <div className="d-flex flex-column" style={{marginLeft: '20px'}}>
+                <div className="d-flex flex-column" style={{marginLeft: '20px'}}>
                   <input onChange={(e) => setPin1(e.target.value)} className="input-bordered-small font-weight-bold rounded-14" type='text' placeholder='_'  maxLength="1" style={{borderRadius: '10px', width: '50px'}} />
                 </div>
                 

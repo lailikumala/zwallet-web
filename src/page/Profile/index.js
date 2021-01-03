@@ -121,7 +121,7 @@ const Content = () => {
 };
 
 
-const TransferSearch = (props) => {
+const Profile = (props) => {
   return (
     <>
       <Nav/>
@@ -138,4 +138,4 @@ const TransferSearch = (props) => {
   );
 };
 
-export default TransferSearch;
+export default Profile;

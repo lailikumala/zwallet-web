@@ -23,7 +23,6 @@ const Content = () => {
           <div class="d-flex justify-content-between align-items-center">
             <div class="font-weight-bold">How to Top Up</div>
           </div>
-
             {data.map((item, index) => {
               return (
                 <>
@@ -36,7 +35,6 @@ const Content = () => {
                 </>
               );
             })}
-          
         </div>
       </div>
     </>

@@ -42,3 +42,95 @@ export const DataTansfer = (fields) => {
 
 
 
+const GetByIdRequest = ()=> {
+    return{
+        type: 'GETBYID_REQUEST'
+    }
+}
+
+const GetByIdSuccess = (data)=> {
+    return{
+        type: 'GETBYID_SUCCESS',
+        payload: data
+    }
+}
+const GetByIdError = (error)=> {
+    return{
+        type: 'GETBYID_ERROR',
+        payload: error
+    }
+}
+
+
+
+
+export const UserById = (fields) => {
+    return (dispatch) =>{
+        
+        dispatch(GetByIdRequest())
+        return Axios({
+            method: 'GET',
+            url:    `/users/${fields.id}`,
+            headers: {
+                'auth-token': `${fields.token}`
+            }
+        }).then((res)=> {
+            const data = res.data
+            console.log(data, 'dat')
+            
+            dispatch(GetByIdSuccess(data))
+        }).catch((err)=> {
+            const message = err.message
+            dispatch(GetByIdError(message))
+        })
+    }
+}
+
+const PostTransferRequest = ()=> {
+    return{
+        type: 'POSTTRANSFER_REQUEST'
+    }
+}
+
+const PostTransferSuccess = (data)=> {
+    return{
+        type: 'POSTTRANSFER_SUCCESS',
+        payload: data
+    }
+}
+const PostTransferError = (error)=> {
+    return{
+        type: 'POSTTRANSFER_ERROR',
+        payload: error
+    }
+}
+
+
+
+export const Transfer = (fields) => {
+    return (dispatch) =>{
+        
+        dispatch(PostTransferRequest())
+        return Axios({
+            method: 'POST',
+            data: {
+                id_sender: fields.id_sender,
+                id_reciever: fields.id_reciever,
+                reciever: fields.reciever,
+                amount: fields.amount,
+                notes: fields.notes
+            },
+            url:    `/transfer`,
+            headers: {
+                'auth-token': `${fields.token}`
+            }
+        }).then((res)=> {
+            const data = res.data
+            console.log(data, 'dat')
+            dispatch(PostTransferSuccess(data))
+        }).catch((err)=> {
+            const message = err.message
+            dispatch(PostTransferError(message))
+        })
+    }
+}

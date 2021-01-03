@@ -13,6 +13,18 @@ const Transfer = (state = initialState, action = {}) => {
     
       case 'TRANSFER_ERROR':
       return { ...state, loading: false, isLogin: false, data:[], error: action.payload };
+      case 'GETBYID_REQUEST':
+        return {
+          ...state, loading: true,
+        };
+      case 'GETBYID_SUCCESS':
+        return {
+          ...state, loading: false, isLogin: true, data: action.payload
+        };
+      case 'GETBYID_ERROR':
+        return {
+          ...state, loading: false, isLogin: false, data:[], error: action.payload
+        };
 
     default:
       return state

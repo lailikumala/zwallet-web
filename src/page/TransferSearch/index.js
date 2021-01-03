@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 import { Sidebar, Nav, FooterPage } from "../../components";
 import { DataTansfer } from "../../redux/actions/Transfer"
 import { useDispatch, useSelector } from "react-redux";
@@ -8,16 +9,21 @@ const Content = (props) => {
   const [name, setName] = React.useState("")
   const [query, setQuery] = React.useState("");
   const dispatch = useDispatch()
-  const {data} = useSelector((s)=> s.Transfer)
+  const {data, loading} = useSelector((s)=> s.Transfer)
   const Auth = useSelector((s)=> s.Auth)
   
 
   React.useEffect(() => {
     dispatch(DataTansfer({
-      name: query,
+      name: name,
       token: Auth.data.token.token
     }))
-  }, [query]);
+  }, [name]);
+
+  // const _handleId = (elemen) => {
+  //   localStorage.setItem("id", elemen);
+  // };
+
   return (
     <>
       <div class="col-lg-9 pl-3">
@@ -30,7 +36,7 @@ const Content = (props) => {
             <label class="d-flex w-100 align-items-center">
               <span class="i-search"></span>
               <input
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
                 placeholder="Search receiver here"
                 type="text"
                 class="input-line"
@@ -38,26 +44,38 @@ const Content = (props) => {
             </label>
           </div>
           
-            {data.map((item, index) => {
+          {loading ? (
+           <div className="d-flex align-items-center mt-2">Loading...</div>
+          ) : (
+            data.map((item, index) => {
               return (
-                <div class="d-flex align-items-center justify-content-between shadow-sm rounded-14 pl-3 mt-2 py-3">
-                    <div class="d-flex align-items-center">
-                   <img
-                      className="mb-3 mt-1"
-                      style={{ borderRadius: "10px" }}
-                      width="75px"
-                      height="75px"
-                      src={item.photo ?'https://db-zwallet.herokuapp.com/' + item.photo : 
-                          "/assets/images/blank.png"}
-                    />
+                <div
+                  onClick={() =>
+                    props.history.push({
+                      pathname: "/transfer/amount",
+                      reciever: {
+                        name: item.name,
+                        phone: item.phone,
+                        photo: item.photo,
+                        id: name ? item.id:item.id,
+                      }, 
+                    })
+                  }
+                  className="d-flex align-items-center justify-content-between shadow-sm rounded-14 pl-3 mt-2 py-3"
+                >
+                  
+                  <div className="d-flex align-items-center">
+                    <img  src={item.photo ?'https://db-zwallet.herokuapp.com/' + item.photo : 
+                    "/assets/images/blank.png"} height="56px" width="56px" />
                     <div class="pl-3">
                       <div class="font-weight-bold text-dark">{item.name}</div>
-                      <div class=" text-dark">{item.phone ? `+62 ${item.phone}` : "-"}</div>
+                      <div class="small text-dark">{`+62 ${item.phone}`}</div>
                     </div>
                   </div>
                 </div>
               );
-            })}
+            })
+          )}
           
         </div>
       </div>

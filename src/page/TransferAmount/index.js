@@ -2,22 +2,19 @@ import Axios from "axios";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { Sidebar, Nav, FooterPage } from "../../components";
+import { useDispatch, useSelector } from 'react-redux'
 
 const Content = (props) => {
   const {
-    location: { receiver },
+    location: { reciever },
   } = props;
 
   const [amount, setAmount] = React.useState("");
   const [notes, setNotes] = React.useState("");
-  const [balance, setBalance] = React.useState(2000000);
+  const {data: dataUser} = useSelector((s) => s.User);
   const [profileData, setProfileData] = React.useState("");
 
-  React.useEffect(() => {
-    Axios.get("https://heroku-zwallet.herokuapp.com/profile/1")
-      .then((res) => setProfileData(res.data.data[0]))
-      .catch((err) => console.log(err));
-  });
+  
   return (
     <>
       <div class="col-lg-9 pl-3">
@@ -28,12 +25,13 @@ const Content = (props) => {
 
           <div class="d-flex align-items-center justify-content-between shadow-sm rounded-14 pl-3 mt-4 py-3">
             <div class="d-flex align-items-center">
-              <img src="/assets/images/1.png" height="56px" width="56px" />
+              <img src={reciever.photo ?'https://db-zwallet.herokuapp.com/' + reciever.photo : 
+                "/assets/images/blank.png"} height="56px" width="56px" />
               <div class="pl-3">
                 <a href="#" class="font-weight-bold text-dark">
-                  {receiver.receiver}
+                  {reciever.name}
                 </a>
-                <div class="small">{receiver.reciever}</div>
+                <div class="small">{`+62 ${reciever.phone}`}</div>
               </div>
             </div>
           </div>
@@ -48,53 +46,47 @@ const Content = (props) => {
             next steps.
           </div>
 
-          <form
-            action="/transfer-confirmation.html"
-            class="mt-5 d-flex flex-column align-items-center"
-          >
+          <form class="mt-3 d-flex flex-column align-items-center">
             <input
-              class="d-block font-weight-bold input-only-placeholder"
+              className="d-block font-weight-bold input-only-placeholder"
               placeholder="0.00"
-              type="text"
+              type="number"
               maxlength="19"
               id="currency"
               onChange={(e) => setAmount(e.target.value)}
             />
 
-            <div class="font-weight-bold mt-3 mb-5">
-              {balance - amount} Available
+            <div class="font-weight-bold mt-3 mb-3">
+             {dataUser.balance - amount}  Available
             </div>
 
-            <div class="input-container w-50">
-              <label for="notes" class="d-flex w-100">
-                <span class="i-edit"></span>
+            <div className=" text-center nunito-grey pt-3 my-2 mx-5 ">
+              <label htmlFor="notes" className="nunito-transparent">
                 <input
-                  id="notes"
-                  placeholder="Add some notes"
-                  type="text"
-                  class="input-line"
                   onChange={(e) => setNotes(e.target.value)}
+                  type="text"
+                  name="notes"
+                  id="notes"
+                  className="form-control form-control border-top-0 border-left-0 border-right-0 rounded-0 w-100"
+                  placeholder="Add some notes"
                 />
               </label>
             </div>
 
-            <div class="w-100 d-flex justify-content-end mt-5">
+            <div class="w-100 d-flex justify-content-end mt-5 mb-5">
               <button
                 type="submit"
                 class="btn btn-primary py-2 px-4 rounded-14"
                 onClick={() =>
                   props.history.push({
                     pathname: "/transfer/confirmation",
-                    receiver: {...receiver},
+                    reciever: {...reciever},
                     input: {
                       amount: amount,
                       notes: notes,
-                      balance: (balance-amount),
-                      profileData: profileData,
-                    }
+                    }, 
                   })
-                }
-              >
+                }>
                 Continue
               </button>
             </div>
@@ -108,9 +100,8 @@ const TransferAmount = (props) => {
   console.log(props, "amount");
   const history = useHistory();
   console.log(history);
-  !props.location.receiver && history.replace("/transfer");
-  // React.useEffect(()=> {
-  // },[])
+  React.useEffect(()=> {
+  },[])
   return (
     <>
       <Nav/>

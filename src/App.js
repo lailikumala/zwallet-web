@@ -8,16 +8,19 @@ import {
   SignUp, 
   ResetPassword, 
   Home, 
+  HistoryTransfer,
   TransferSearch, 
   TransferAmount, 
   TransferConfirmation, 
+  TransferStatus,
   Topup, 
   Profile, 
   PersonalInformation, 
   AddPhone,
   ChangePassword,
   ChangePin,
-  ManagePhone
+  ManagePhone,
+ 
 } from "./page";
 import configureStore from "../src/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
@@ -29,7 +32,8 @@ const Routes = () => {
     <Router>
       <Switch>
         <PrivateRoute exact path="/dashboard" component={Home} />
-        <PrivateRoute exact path="/transfer" component={TransferSearch} exact />
+        <PrivateRoute exact path="/dashboard/history" component={HistoryTransfer} />
+        <PrivateRoute exact path="/transfer" component={TransferSearch} />
         <PrivateRoute exact path="/topup" component={Topup} />
         <PrivateRoute exact path="/profile" component={Profile} />
         <PrivateRoute exact path="/profile/personal_information" component={PersonalInformation} />
@@ -39,6 +43,7 @@ const Routes = () => {
         <PrivateRoute exact path="/profile/change_pin" component={ChangePin} />
         <PrivateRoute component={TransferAmount} path='/transfer/amount' />
         <PrivateRoute component={TransferConfirmation} path='/transfer/confirmation' />
+        <PrivateRoute component={TransferStatus} path='/transfer/status' />
         <PublicRoute component={LandingPage} restricted={false} path='/' exact />
         <PublicRoute component={Login} restricted={true} path='/login' />
         <PublicRoute component={SignUp} restricted={true} path='/signup' />

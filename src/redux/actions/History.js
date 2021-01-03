@@ -1,31 +1,33 @@
 import Axios from 'axios'
-
-// by id
-const UserRequest = ()=> {
+const GetHistoryRequest = ()=> {
     return{
-        type: 'USER_REQUEST'
+        type: 'GETHISTORY_REQUEST'
     }
 }
 
-const UserSuccess = (data)=> {
+const GetHistorySuccess = (data)=> {
     return{
-        type: 'USER_SUCCESS',
+        type: 'GETHISTORY_SUCCESS',
         payload: data
     }
 }
-const UserError = (error)=> {
+const GetHistoryError = (error)=> {
     return{
-        type: 'USER_ERROR',
+        type: 'GETHISTORY_ERROR',
         payload: error
     }
 }
 
-export const GetUser = (fields) => {
+
+
+
+export const History = (fields) => {
     return (dispatch) =>{
-        dispatch(UserRequest())
+        
+        dispatch(GetHistoryRequest())
         return Axios({
             method: 'GET',
-            url:    `/users/${fields.id}`,
+            url:    `/transfer/${fields.id}`,
             headers: {
                 'auth-token': `${fields.token}`
             }
@@ -33,15 +35,13 @@ export const GetUser = (fields) => {
             const data = res.data
             console.log(data, 'dat')
             
-            dispatch(UserSuccess(data))
+            dispatch(GetHistorySuccess(data))
         }).catch((err)=> {
             const message = err.message
-            dispatch(UserError(message))
+            dispatch(GetHistoryError(message))
         })
     }
 }
-
-
 
 
 

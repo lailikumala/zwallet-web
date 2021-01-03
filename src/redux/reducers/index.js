@@ -8,6 +8,7 @@ import PatchUser from './PatchUser'
 import ChangePin from './ChangePin'
 import ChangePhone from './ChangePhone'
 import ChangePhoto from './ChangePhoto'
+import History from './History'
 
 
 
@@ -20,7 +21,8 @@ const reducers = combineReducers({
     PatchUser,
     ChangePin,
     ChangePhone,
-    ChangePhoto
+    ChangePhoto,
+    History
     
 })
 

@@ -1,91 +1,119 @@
-import React, { useReducer } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { Sidebar, Nav, FooterPage } from "../../components";
 import { DateTime } from "luxon";
-import Axios from "axios";
+import { useDispatch, useSelector } from 'react-redux'
+import { Transfer } from '../../redux/actions/Transfer';
 import { Button, Modal } from "react-bootstrap";
+
 const Content = (props) => {
   const {
-    location: { input, receiver },
+    location: { input, reciever },
   } = props;
-  const [transferDate, setTransferDate] = React.useState(
-    DateTime.local().toFormat("DD - hh.mm")
-  );
-  const [profileData, setProfileData] = React.useState("");
-  const [showVerification, setShowVerification] = React.useState(false);
-  const [pin, setPin] = React.useState("");
-  const inputFocus = React.useRef(null);
-  React.useEffect(() => {
-    Axios.get("https://heroku-zwallet.herokuapp.com/profile/1")
-      .then((res) => setProfileData(res.data.data[0]))
-      .catch((err) => console.log(err));
-  }, []);
+  const [transferDate, setTransferDate] = React.useState(DateTime.local().toFormat("DD - hh.mm"));
+
+    const [pin1, setpin1] = React.useState("");
+    const [pin2, setpin2] = React.useState("");
+    const [pin3, setpin3] = React.useState("");
+    const [pin4, setpin4] = React.useState("");
+    const [pin5, setpin5] = React.useState("");
+    const [pin6, setpin6] = React.useState("");
+    const pin = pin1 + pin2 + pin3 + pin4 + pin5 + pin6
+    console.log(pin, 'input')
+
+    const dispatch = useDispatch();
+    const [showVerification, setShowVerification] = React.useState(false);
+    const Auth = useSelector((s) => s.Auth);
+    const {data} = useSelector((s) => s.Transfer);
+    const {data: dataUser} = useSelector((s) => s.User);
+    const pinUser = dataUser.pin;
+    console.log(pinUser)
+    const id_sender = Auth.data.token.id;
+    console.log(id_sender)
+    const id_reciever = reciever.id;
+    console.log(id_reciever)
+    const name = reciever.name;
+    console.log(reciever)
+    const amount = input.amount;
+    console.log(amount)
+    const notes = input.notes;
+    console.log(notes)
 
 
-  const handleSubmit = () => {
-    // alert("aha");
-    Axios({
-      method: "post",
-      url: `https://heroku-zwallet.herokuapp.com/transaction/${receiver.id}`,
-      data: {
-        amount: input.amount,
-        note: input.notes,
-        id_sender: profileData.id || 0,
-    
-      },
-    })
-      .then((res) => {
-        setShowVerification(false)
+
+  const onSubmit = () => {
+    if(pin == pinUser) {
+      console.log(pin, pinUser)
+      dispatch(Transfer({
+        token: Auth.data.token.token,
+        id_sender: id_sender,
+        id_reciever: id_reciever,
+        reciever: name,
+        amount: amount,
+        notes: notes
+      }));
+      alert('success')
+      props.history.push({
+        pathname: "/transfer/status",
+        reciever: {...reciever},
+        input: {
+          amount: amount,
+          notes: notes,
+        }, 
       })
-      .catch((err) => console.log(err.message));
+    } else {
+      alert('failed')
+    }
+ 
   };
 
   return (
     <>
-      <div class="col-lg-9 pl-3">
-        <div class="p-4 bg-white side-nav-right shadow">
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="font-weight-bold">Transfer To</div>
+      <div className="col-lg-9 pl-3">
+        <div className="p-4 bg-white side-nav-right shadow">
+          <div className="d-flex justify-content-between align-items-center">
+            <div className="font-weight-bold">Transfer To</div>
           </div>
 
-          <div class="d-flex align-items-center justify-content-between shadow-sm rounded-14 pl-3 my-4 py-3">
-            <div class="d-flex align-items-center">
-              <img src="/assets/images/1.png" height="56px" width="56px" />
-              <div class="pl-3">
-                <div class="font-weight-bold text-dark">{receiver.reciever}</div>
+          <div className="d-flex align-items-center justify-content-between shadow-sm rounded-14 pl-3 my-4 py-3">
+            <div className="d-flex align-items-center">
+            <img src={reciever.photo ?'https://db-zwallet.herokuapp.com/' + reciever.photo : 
+                "/assets/images/blank.png"} height="56px" width="56px" />
+              <div className="pl-3">
+                <div className="font-weight-bold text-dark">{name}</div>
+                <div className="small">{`+62 ${reciever.phone}`}</div>
               </div>
             </div>
           </div>
 
-          <div class="font-weight-bold">Details</div>
+          <div className="font-weight-bold">Details</div>
 
-          <div class="shadow-sm rounded-14 pl-3 my-4 py-3">
-            <div class="small">Amount</div>
-            <div class="font-weight-bold text-dark">{input.amount}</div>
+          <div className="shadow-sm rounded-14 pl-3 my-4 py-3">
+            <div className="small">Amount</div>
+            <div className="font-weight-bold text-dark">{amount}</div>
           </div>
 
-          <div class="shadow-sm rounded-14 pl-3 my-4 py-3">
-            <div class="small">Balance Left</div>
-            <div class="font-weight-bold text-dark">{input.balance}</div>
+          <div className="shadow-sm rounded-14 pl-3 my-4 py-3">
+            <div className="small">Balance Left</div>
+            <div className="font-weight-bold text-dark">{dataUser.balance - amount}</div>
           </div>
 
-          <div class="shadow-sm rounded-14 pl-3 my-4 py-3">
-            <div class="small">Date & Time</div>
-            <div class="font-weight-bold text-dark">{transferDate}</div>
+          <div className="shadow-sm rounded-14 pl-3 my-4 py-3">
+            <div className="small">Date & Time</div>
+            <div className="font-weight-bold text-dark">{transferDate}</div>
           </div>
 
-          <div class="shadow-sm rounded-14 pl-3 my-4 py-3">
-            <div class="small">Notes</div>
-            <div class="font-weight-bold text-dark">{input.notes}</div>
+          <div className="shadow-sm rounded-14 pl-3 my-4 py-3">
+            <div className="small">Notes</div>
+            <div className="font-weight-bold text-dark">{notes}</div>
           </div>
 
-          <div class="d-flex justify-content-end mt-4">
+          <div className="d-flex justify-content-end mt-4">
             <button
               onClick={() => setShowVerification(true)}
-              class="py-2 px-4 rounded-14 btn btn-primary"
+              className="py-2 px-4 rounded-14 btn btn-primary"
               data-toggle="modal"
-              data-target="#staticBackdrop"
-            >
+              data-target="#staticBackdrop">
               Continue
             </button>
           </div>
@@ -95,12 +123,7 @@ const Content = (props) => {
         show={showVerification}
         onHide={() => {
           setShowVerification(false)
-        }}
-        onExited={()=> {
-          alert('Transfer successfully!')
-        }}
-        onEntered={() => inputFocus.current.focus()}
-      >
+        }}>
         <Modal.Header closeButton>
           <Modal.Title>Enter PIN to Transfer</Modal.Title>
         </Modal.Header>
@@ -108,102 +131,30 @@ const Content = (props) => {
           Enter your 6 digits PIN for confirmation to continue transferring
           money.
           <form action="success-transfer.html">
-            <div class="my-5 row no-gutters container-input">
-              <div class="col-2 input-class px-2 px-lg-0">
-                <input
-                  value={pin}
-                  ref={inputFocus}
-                  maxLength={6}
-                  onChange={(e) => setPin(e.target.value)}
-                  style={{ opacity: 0, position: 'absolute' }}
-                />
-                <input
-                  class="input-bordered-small font-weight-bold rounded-14"
-                  type="text"
-                  // oninput="onChangeInput(this)"
-                  maxlength="1"
-                  readOnly
-                  value={pin.charAt(0)}
-                  onFocus={() => inputFocus.current.focus()}
-                  // onChange={(e) => setpin1(e.target.value)}
-                  // ref={input1}
-                />
+            <div className="d-flex justify-content-center" style={{marginTop: '100px', marginBottom: '90px'}}>
+              <div className="d-flex flex-column" style={{marginLeft: '20px'}}>
+                <input onChange={(e) => setpin1(e.target.value)} className="input-bordered-small font-weight-bold rounded-14" type='text' placeholder='_'  maxLength="1" style={{borderRadius: '10px', width: '50px'}} />
               </div>
-
-              <div class="col-2 input-class px-2 px-lg-0">
-                <input
-                  class="input-bordered-small font-weight-bold rounded-14"
-                  // oninput="onChangeInput(this)"
-                  type="text"
-                  maxlength="1"
-                  readOnly
-                  value={pin.charAt(1)}
-                  onFocus={() => inputFocus.current.focus()}
-                  // onChange={(e) => setpin2(e.target.value)}
-                  // ref={input2}
-                />
+              <div className="d-flex flex-column" style={{marginLeft: '20px'}}>
+                <input onChange={(e) => setpin2(e.target.value)} className="input-bordered-small font-weight-bold rounded-14" type='text' placeholder='_'  maxLength="1" style={{borderRadius: '10px', width: '50px'}} />
               </div>
-
-              <div class="col-2 input-class px-2 px-lg-0">
-                <input
-                  class="input-bordered-small font-weight-bold rounded-14"
-                  type="text"
-                  // oninput="onChangeInput(this)"
-                  maxlength="1"
-                  readOnly
-                  value={pin.charAt(2)}
-                  onFocus={() => inputFocus.current.focus()}
-                  // onChange={(e) => setpin3(e.target.value)}
-                  // ref={input3}
-                />
+              <div className="d-flex flex-column" style={{marginLeft: '20px'}}>
+                <input onChange={(e) => setpin3(e.target.value)} className="input-bordered-small font-weight-bold rounded-14" type='text' placeholder='_'  maxLength="1" style={{borderRadius: '10px', width: '50px'}} />
               </div>
-
-              <div class="col-2 input-class px-2 px-lg-0">
-                <input
-                  class="input-bordered-small font-weight-bold rounded-14"
-                  type="text"
-                  // oninput="onChangeInput(this)"
-                  maxlength="1"
-                  readOnly
-                  value={pin.charAt(3)}
-                  onFocus={() => inputFocus.current.focus()}
-                  // onChange={(e) => setpin4(e.target.value)}
-                  // ref={input4}
-                />
+              <div className="d-flex flex-column" style={{marginLeft: '20px'}}>
+                <input onChange={(e) => setpin4(e.target.value)} className="input-bordered-small font-weight-bold rounded-14" type='text' placeholder='_'  maxLength="1" style={{borderRadius: '10px', width: '50px'}} />
               </div>
-
-              <div class="col-2 input-class px-2 px-lg-0">
-                <input
-                  class="input-bordered-small font-weight-bold rounded-14"
-                  type="text"
-                  // oninput="onChangeInput(this)"
-                  maxlength="1"
-                  readOnly
-                  value={pin.charAt(4)}
-                  onFocus={() => inputFocus.current.focus()}
-                  // onChange={(e) => setpin5(e.target.value)}
-                  // ref={input5}
-                />
+              <div className="d-flex flex-column" style={{marginLeft: '20px'}}>
+                <input onChange={(e) => setpin5(e.target.value)} className="input-bordered-small font-weight-bold rounded-14" type='text' placeholder='_'  maxLength="1" style={{borderRadius: '10px', width: '50px'}} />
               </div>
-
-              <div class="col-2 input-class px-2 px-lg-0">
-                <input
-                  class="input-bordered-small font-weight-bold rounded-14"
-                  type="text"
-                  // oninput="onChangeInput(this)"
-                  maxlength="1"
-                  readOnly
-                  value={pin.charAt(5)}
-                  onFocus={() => inputFocus.current.focus()}
-                  // onChange={(e) => setpin6(e.target.value)}
-                  // ref={input6}
-                />
+              <div className="d-flex flex-column" style={{marginLeft: '20px'}}>
+                <input onChange={(e) => setpin6(e.target.value)} className="input-bordered-small font-weight-bold rounded-14" type='text' placeholder='_'  maxLength="1" style={{borderRadius: '10px', width: '50px'}} />
               </div>
-            </div>
+            </div>  
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={() => handleSubmit()}>
+          <Button variant="primary" onClick={() => onSubmit()}>
             Save Change
           </Button>
         </Modal.Footer>
@@ -212,13 +163,10 @@ const Content = (props) => {
   );
 };
 const TransferConfirmation = (props) => {
-  console.log(props, "propsnyaaaaaaaaaaaaaaa");
   const history = useHistory();
-  // console.log(history);
-  (!props.location.receiver || !props.location.input) &&
+  (!props.location.reciever || !props.location.input) &&
     history.replace("/transfer");
-  // React.useEffect(()=> {
-  // },[])
+
   return (
     <>
     <Nav/>
@@ -226,7 +174,7 @@ const TransferConfirmation = (props) => {
       <section class="my-5 container">
         <div class="row">
           <Sidebar />
-          {props.location.receiver || props.location.input ? (
+          {props.location.reciever || props.location.input ? (
             <Content {...props} />
           ) : (
             <div>no</div>

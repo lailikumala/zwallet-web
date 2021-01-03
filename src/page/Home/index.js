@@ -2,20 +2,26 @@ import React from 'react'
 import {Sidebar, Nav, FooterPage} from '../../components'
 import { useDispatch, useSelector } from 'react-redux';
 import { GetUser } from '../../redux/actions/Users';
+import { History } from '../../redux/actions/History';
 import './src/styleHome.css'
 
 const Content = () => {
 
   const dispatch = useDispatch()
   const { data } = useSelector((s)=> s.User)
+  const { data: dataHistory, loading } = useSelector((s)=> s.History)
   const Auth = useSelector((s)=> s.Auth)
   console.log(Auth.data.token, 'll')
   React.useEffect(()=> {
     dispatch(GetUser({
       id: Auth.data.token.id,
       token: Auth.data.token.token
-    }))
-    console.log(data, 'mm')
+    }));
+    dispatch(History({
+      id: Auth.data.token.id,
+      token: Auth.data.token.token
+    }));
+    
   }, []);
 
     return(<>
@@ -98,80 +104,37 @@ const Content = () => {
                 >
                   <div class="font-weight-bold">Transaction History</div>
 
-                  <a href="/history.html" class="small">See all</a>
+                  <a href="/dashboard/history" class="small">See all</a>
                 </div>
 
-                <div
-                  class="d-flex align-items-center justify-content-between py-3"
-                >
-                  <div class="d-flex align-items-center">
-                    <img
-                      src="/assets/images/1.png"
-                      height="56px"
-                      width="56px"
-                    />
-                    <div class="pl-3">
-                      <div class="font-weight-bold">Samuel Suhi</div>
-                      <div class="small">Transfer</div>
-                    </div>
-                  </div>
+                {loading ? (
+                  <div className="d-flex align-items-center mt-2">Loading...</div>
+                  ) : (
+                  dataHistory.map((item) => {
+                    return (
+                      <>
+                      <div
+                        class="d-flex align-items-center justify-content-between py-3 mt-3">
+                        <div class="d-flex align-items-center">
+                          <img
+                            src="/assets/images/blank.png"
+                            height="56px"
+                            width="56px"
+                          />
+                          <div class="pl-3">
+                            <div class="font-weight-bold">{item.reciever}</div>
+                            <div class="small">Transfer</div>
+                          </div>
+                        </div>
 
-                  <div class="text-success font-weight-bold">+ Rp50.000</div>
-                </div>
+                        <div class="text-danger font-weight-bold">- Rp{item.amount}</div>
+                      </div>
+                      </>
+                    );
+                  })
+                )}
 
-                <div
-                  class="d-flex align-items-center justify-content-between py-3"
-                >
-                  <div class="d-flex align-items-center">
-                    <img
-                      src="/assets/images/netflix.png"
-                      height="56px"
-                      width="56px"
-                    />
-                    <div class="pl-3">
-                      <div class="font-weight-bold">Netflix</div>
-                      <div class="small">Subsription</div>
-                    </div>
-                  </div>
-
-                  <div class="text-danger font-weight-bold">- Rp149.000</div>
-                </div>
-
-                <div
-                  class="d-flex align-items-center justify-content-between py-3"
-                >
-                  <div class="d-flex align-items-center">
-                    <img
-                      src="/assets/images/cristine.png"
-                      height="56px"
-                      width="56px"
-                    />
-                    <div class="pl-3">
-                      <div class="font-weight-bold">Christine Mar...</div>
-                      <div class="small">Transfer</div>
-                    </div>
-                  </div>
-
-                  <div class="text-success font-weight-bold">+ Rp150.000</div>
-                </div>
-
-                <div
-                  class="d-flex align-items-center justify-content-between py-3"
-                >
-                  <div class="d-flex align-items-center">
-                    <img
-                      src="/assets/images/adobe.png"
-                      height="56px"
-                      width="56px"
-                    />
-                    <div class="pl-3">
-                      <div class="font-weight-bold">Adobe Inc.</div>
-                      <div class="small">Subsription</div>
-                    </div>
-                  </div>
-
-                  <div class="text-danger font-weight-bold">- Rp249.000</div>
-                </div>
+                
               </div>
             </div>
           </div>
