@@ -34,10 +34,10 @@
  <img src="https://user-images.githubusercontent.com/66887616/103489376-fee2b380-4dc8-11eb-8b9d-589d0ea6b28b.png" width="650">
  
   ### Check Pin
- <img src="https://user-images.githubusercontent.com/66887616/103489384-043ffe00-4dc9-11eb-8e4f-b6627edcf2d3.png" width="650">
+ <img src="https://user-images.githubusercontent.com/66887616/103489375-fdb18680-4dc8-11eb-8327-e64e563d7507.png" width="650">
  
   ### Transfer Status
- <img src=https://user-images.githubusercontent.com/66887616/103489375-fdb18680-4dc8-11eb-8327-e64e563d7507.png" width="650">
+ <img src="https://user-images.githubusercontent.com/66887616/103489375-fdb18680-4dc8-11eb-8327-e64e563d7507.png" width="650">
  
  ### Top Up
  <img src="https://user-images.githubusercontent.com/66887616/103489383-043ffe00-4dc9-11eb-851b-e633ed3b281e.png" width="650">
