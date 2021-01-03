@@ -16,22 +16,37 @@
 ## in-app features
   
  ### Login
- <img src="https://user-images.githubusercontent.com/66887616/102000392-cf45fd00-3c9b-11eb-83c5-2927db59b2c0.png" width="650">
+ <img src="https://user-images.githubusercontent.com/66887616/103489379-00ac7700-4dc9-11eb-9c05-28dd5e251ab6.png" width="650">
   
  ### Forgot Password
- <img src="https://user-images.githubusercontent.com/66887616/102000397-d1a85700-3c9b-11eb-8749-db253efecf6a.png" width="650">
+ <img src="https://user-images.githubusercontent.com/66887616/103489382-02763a80-4dc9-11eb-9e7d-30305154a2d9.png" width="650">
+ 
+  ### History Transfer
+ <img src="https://user-images.githubusercontent.com/66887616/103489378-0013e080-4dc9-11eb-91a6-a27ad6268e1b.png" width="650">
   
  ### Search Transfer
- <img src="https://user-images.githubusercontent.com/66887616/102000398-d240ed80-3c9b-11eb-8b41-1e622419d282.png" width="650">
+ <img src="https://user-images.githubusercontent.com/66887616/103489384-043ffe00-4dc9-11eb-8e4f-b6627edcf2d3.png" width="650">
+ 
+  ### Transfer Amount
+ <img src="https://user-images.githubusercontent.com/66887616/103489372-fbe7c300-4dc8-11eb-831b-70a6c9c47362.png" width="650">
+ 
+  ### Transfer Confirmation 
+ <img src="https://user-images.githubusercontent.com/66887616/103489376-fee2b380-4dc8-11eb-8b9d-589d0ea6b28b.png" width="650">
+ 
+  ### Check Pin
+ <img src="https://user-images.githubusercontent.com/66887616/103489384-043ffe00-4dc9-11eb-8e4f-b6627edcf2d3.png" width="650">
+ 
+  ### Transfer Status
+ <img src=https://user-images.githubusercontent.com/66887616/103489375-fdb18680-4dc8-11eb-8327-e64e563d7507.png" width="650">
  
  ### Top Up
- <img src="https://user-images.githubusercontent.com/66887616/102000399-d2d98400-3c9b-11eb-9f39-22dca0c1d8aa.png" width="650">
+ <img src="https://user-images.githubusercontent.com/66887616/103489383-043ffe00-4dc9-11eb-851b-e633ed3b281e.png" width="650">
  
  ### Profile
- <img src="https://user-images.githubusercontent.com/66887616/102000395-d0772a00-3c9b-11eb-8261-ab0e297cbc18.png" width="650">
+ <img src="https://user-images.githubusercontent.com/66887616/103489380-01450d80-4dc9-11eb-960c-9ad4f1a8bf15.png" width="650">
  
  ### Profile Information
- <img src="https://user-images.githubusercontent.com/66887616/102000396-d10fc080-3c9b-11eb-8561-1bfd44e5d6c0.png" width="650">
+ <img src="https://user-images.githubusercontent.com/66887616/103489381-01dda400-4dc9-11eb-9615-a3614889f57f.png" width="650">
  
  ## How to install and Run application 
 
