@@ -81,7 +81,7 @@ npm install
 ```
 
 ## Link Publish App
-https://app-zwallet-web.web.app/login
+https://zwallet-website-f1995.web.app
  
 
 
